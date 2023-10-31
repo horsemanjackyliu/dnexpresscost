@@ -1,0 +1,258 @@
+{
+  "namespace": "com.dnexpresscost",
+  "definitions": {
+    "com.dnexpresscost.ExpressPrice": {
+      "kind": "entity",
+      "elements": {
+        "tag": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "ID": {
+          "type": "cds.Integer"
+        },
+        "originProvince": {
+          "type": "cds.String"
+        },
+        "targetProvince": {
+          "type": "cds.String"
+        },
+        "basePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "scalePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        }
+      }
+    },
+    "com.dnexpresscost.DNExpress": {
+      "kind": "entity",
+      "elements": {
+        "outboundDelivery": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "originProvince": {
+          "type": "cds.String"
+        },
+        "targetProvince": {
+          "type": "cds.String"
+        },
+        "basePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "scalePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "grossWeight": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "expressCost": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "cpCode": {
+          "type": "cds.String"
+        },
+        "logisticCode": {
+          "type": "cds.String"
+        },
+        "logisticTrace": {
+          "type": "cds.String",
+          "length": 800
+        }
+      }
+    },
+    "CatalogService": {
+      "kind": "service",
+      "@requires": "authenticated-user"
+    },
+    "CatalogService.ExpressPrice": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "com.dnexpresscost.ExpressPrice"
+          ]
+        }
+      },
+      "elements": {
+        "tag": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "ID": {
+          "type": "cds.Integer"
+        },
+        "originProvince": {
+          "type": "cds.String"
+        },
+        "targetProvince": {
+          "type": "cds.String"
+        },
+        "basePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "scalePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        }
+      }
+    },
+    "CatalogService.DNExpress": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "com.dnexpresscost.DNExpress"
+          ]
+        }
+      },
+      "elements": {
+        "outboundDelivery": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "originProvince": {
+          "type": "cds.String"
+        },
+        "targetProvince": {
+          "type": "cds.String"
+        },
+        "basePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "scalePrice": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "grossWeight": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "expressCost": {
+          "type": "cds.Decimal",
+          "precision": 9,
+          "scale": 2
+        },
+        "cpCode": {
+          "type": "cds.String"
+        },
+        "logisticCode": {
+          "type": "cds.String"
+        },
+        "logisticTrace": {
+          "type": "cds.String",
+          "length": 800
+        }
+      }
+    },
+    "CatalogService.updateExpress": {
+      "kind": "action",
+      "params": {
+        "outboundDelivery": {
+          "type": {
+            "ref": [
+              "CatalogService.DNExpress",
+              "outboundDelivery"
+            ]
+          }
+        },
+        "cpCode": {
+          "type": {
+            "ref": [
+              "CatalogService.DNExpress",
+              "cpCode"
+            ]
+          }
+        },
+        "logisticCode": {
+          "type": {
+            "ref": [
+              "CatalogService.DNExpress",
+              "logisticCode"
+            ]
+          }
+        },
+        "logisticTrace": {
+          "type": {
+            "ref": [
+              "CatalogService.DNExpress",
+              "logisticTrace"
+            ]
+          },
+          "length": 800
+        }
+      },
+      "returns": {
+        "elements": {
+          "logisticCode": {
+            "type": "cds.String"
+          }
+        }
+      }
+    },
+    "CatalogService.insertExpress": {
+      "kind": "action",
+      "params": {
+        "outboundDelivery": {
+          "type": {
+            "ref": [
+              "CatalogService.DNExpress",
+              "outboundDelivery"
+            ]
+          }
+        },
+        "originProvince": {
+          "type": {
+            "ref": [
+              "CatalogService.DNExpress",
+              "originProvince"
+            ]
+          }
+        },
+        "targetProvince": {
+          "type": {
+            "ref": [
+              "CatalogService.DNExpress",
+              "targetProvince"
+            ]
+          }
+        },
+        "grossWeight": {
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "elements": {
+          "expressCostStr": {
+            "type": "cds.String"
+          }
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v4.3.2",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}
